@@ -1,3 +1,4 @@
+<?php include_once "app/auto_load.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,47 +13,37 @@
 	
 
 	<?php
-
-
-       // echo time(); //its a time function.
-
+		 
+      
 		//add student form issetting
 		if(isset($_POST['add'])){
+			//Get value
+			$name = $_POST['name'];
+			$email = $_POST['email'];
+			$cell = $_POST['cell'];
+			$uname = $_POST['uname'];
+			$age = $_POST['age'];
 
-		     $name = $_POST['name'];
-			 $roll = $_POST['roll'];
-			 $email = $_POST['email'];
-			 $cell = $_POST['cell'];
-			 $uname = $_POST['uname'];
-			 $age = $_POST['age'];
-			//echo $photo = $_POST['photo'];
-			$cell_len = strlen($cell);
+			if(isset($_POST['gender'])){
+				$gender = $_POST['gender'];
+			}
+
+			$shift = $_POST['shift'];
+
+			$location = $_POST['location'];
+		
+			
 
 			//file upload
-             $file_name = $_FILES['photo']['name'];
-             $file_type = $_FILES['photo']['type'];
-             $file_tmp = $_FILES['photo']['tmp_name'];
-             $file_size = $_FILES['photo']['size'];
-
-             $unique_file_name = md5(time() . rand()) . $file_name;
-
-             move_uploaded_file($file_tmp, 'photo/'. $unique_file_name);
+           
 
 
 
 			//form validation
-			if(empty($name) || empty($roll) || empty($email) || empty($cell) || empty($uname) || empty($age)){
-				$mess = '<p class="alert alert-danger">All fields are required <button class="close" data-dismiss="alert">&times</button></p>';		
-			}elseif( filter_var( $roll,   FILTER_VALIDATE_INT) == false ){
-				$mess = '<p class="alert alert-danger">Invalid roll number!! <button class="close" data-dismiss="alert">&times</button></p>';
-			}elseif( filter_var( $email,   FILTER_VALIDATE_EMAIL) == false ){
-				$mess = '<p class="alert alert-danger">Envalid email address!! <button class="close" data-dismiss="alert">&times</button></p>';
-			}elseif($cell_len != 11){
-				$mess = '<p class="alert alert-danger">Incorrect Phone number!! <button class="close" data-dismiss="alert">&times</button></p>';
-			}elseif($age < 18 || $age >30){
-				$mess = '<p class="alert alert-danger">Invalid age!! <button class="close" data-dismiss="alert">&times</button></p>';
-			}else{
-                $mess = '<p class="alert alert-success">Data stable!! <button class="close" data-dismiss="alert">&times</button></p>';
+			if(empty($name) || empty($email) || empty($cell) || empty($uname) || empty($age) || empty($gender) || empty($shift) || empty($location)){
+				$mess = validationMsg('All fields are required', 'warning') ;		
+			}elseif(filter_var($email, FILTER_VALIDATE_EMAIL) == false){
+				$mess = validationMsg('Invalid email', 'danger') ;	
             }
 
 		}
@@ -94,30 +85,40 @@
 					</div>
 
 					<div class="form-group">
-						<label for="">Gender</label><br>
-						<input class=""  name="gender" type="radio" id="male"><label for="male">Male</label>
-						<input class=""  name="gender" type="radio" id="female"><label for="female">Male</label>
-					</div>
-
-					<div class="form-group">
 						<label for="">Age</label>
 						<input class="form-control" name="age" type="text">
 					</div>
 
 					<div class="form-group">
+						<label for="">Gender</label><br>
+						<input checked value="male"  name="gender" type="radio" id="male"><label for="male">Male</label>
+						<input value="female"  name="gender" type="radio" id="female"><label for="female">Female</label>
+					</div>
+
+				
+					<div class="form-group">
+						<label for="">Shift</label>
+						<select name="shift" id="">
+							<option value="">-Selectt-</option>
+							<option value="Morning">-Morning-</option>
+							<option value="Evening">-Evening-</option>
+						</select>
+					</div>
+
+					<div class="form-group">
 						<label for="">Location</label>
-						<select name="" id="">
+						<select name="location" id="">
 							<option value="">-Select-</option>
-							<option value="">-Dhaka-</option>
-							<option value="">-Rajshahi-</option>
-							<option value="">-Chittagong-</option>
-							<option value="">-Kumilla-</option>
-							<option value="">-Barisal-</option>
-							<option value="">-Sylhet-</option>
-							<option value="">-Rongpur-</option>
-							<option value="">-Dinajpur-</option>
-							<option value="">-Khulna-</option>
-							<option value="">-Mymensingh-</option>
+							<option value="Dhaka">-Dhaka-</option>
+							<option value="Rajshahi">-Rajshahi-</option>
+							<option value="Chittagong">-Chittagong-</option>
+							<option value="Kumilla">-Kumilla-</option>
+							<option value="Barisal">-Barisal-</option>
+							<option value="Sylhet">-Sylhet-</option>
+							<option value="Rongpur">-Rongpur-</option>
+							<option value="Dinajpur">-Dinajpur-</option>
+							<option value="Khulna">-Khulna-</option>
+							<option value="Mymensingh">-Mymensingh-</option>
 						</select>
 					</div>
 

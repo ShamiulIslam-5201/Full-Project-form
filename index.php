@@ -45,7 +45,7 @@
 				$mess = validationMsg('All fields are required', 'danger') ;		
 			}elseif(filter_var($email, FILTER_VALIDATE_EMAIL) == false){
 				$mess = validationMsg('Invalid email' ) ;	
-            }elseif($age <= 5 || $age >= 12){
+            }elseif($age <= 17 || $age >= 25){
 				$mess = validationMsg('Your Age is not okay for our school', 'warning' ) ;
 			}else{
 

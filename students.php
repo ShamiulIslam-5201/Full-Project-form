@@ -34,8 +34,7 @@
 			$conn -> query($sql);
 
 			header("location:students.php");
-		}
-	
+		}	
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -105,7 +104,7 @@
 									
 								<a class="btn btn-sm btn-info" href="profile.php?student_id=<?php echo $students['id'];?>"><i class="fas fa-eye"></i></a>
 								
-								<a class="btn btn-sm btn-warning" href="#"><i class="fas fa-edit"></i></a>
+								<a class="btn btn-sm btn-warning" href="edit.php?edit_id=<?php echo $students['id'];?>"><i class="fas fa-edit"></i></a>
 
 								<a id="dlt_btn" class="btn btn-sm btn-danger" href="?delete_id=<?php echo $students['id'];?> &photo=<?php echo $students['photo'];?>"><i class="fas fa-trash-alt"></i></a>
 							</td>

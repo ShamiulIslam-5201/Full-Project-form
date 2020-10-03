@@ -12,6 +12,8 @@
 
 		$single_student = $data -> fetch_assoc();
 
+		
+
 	}
 ?>
 

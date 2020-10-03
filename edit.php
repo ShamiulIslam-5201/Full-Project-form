@@ -46,12 +46,7 @@
 
 			$location = $_POST['location'];
 
-			//Image upload
-			// $file_name = $_FILES['photo']['name'];
-			// $file_tmp_name = $_FILES['photo']['tmp_name'];
-			// $file_size = $_FILES['photo']['size'];
-
-			// $unique_file_name = md5(time() . rand()) .$file_name;
+			
 
 			
 			//form validation
@@ -63,13 +58,31 @@
 				$mess = validationMsg('Your Age is not okay for our school', 'warning' ) ;
 			}else{
 
-				$sql = "UPDATE students SET name='$name', email='$email', cell='$cell', uname='$uname', age='$age', gender='$gender', shift='$shift', location='$location' WHERE id='$edit_id'  ";
+				$photo_name = '';
+				if(empty($_FILES['new_photo']['name'])){
+					$photo_name = $_POST['old_photo'];
+				}else{
+						//Image upload
+				$file_name = $_FILES['new_photo']['name'];
+				$file_tmp_name = $_FILES['new_photo']['tmp_name'];
+				$file_size = $_FILES['new_photo']['size'];
+
+				$photo_name = md5(time() . rand()) .$file_name;
+
+				move_uploaded_file($file_tmp_name, 'photo/students/' . $photo_name);
+				}
+
+				$sql = "UPDATE students SET name='$name', email='$email', cell='$cell', uname='$uname', age='$age', gender='$gender', shift='$shift', location='$location', photo='$photo_name'  WHERE id='$edit_id'  ";
 
 				$conn -> query($sql);
 
-				// move_uploaded_file($file_tmp_name, 'photo/students/' . $unique_file_name);
+			
 
-				$mess = validationMsg('Data Stable', 'success') ;
+				
+
+
+
+				$mess = validationMsg('Data Updated', 'success') ;
 
 				
 
